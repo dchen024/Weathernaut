@@ -26,7 +26,7 @@ Kevin Fong:
 3. **Current Tiktok Trend**: This app will help you find the current tiktok that is trending to keep the user up to date or just a random tiktok video for user to discover new trends.
 
 Sajed Atwa
-1. **WeatherToday**: This app will give the weather conditions and temperature of any location specified by the user.
+1. **Weathernaut**: This app will give the weather conditions and temperature of any location specified by the user.
 2. **Maps**: This app that will provide directions towards specific locations provided by the user
 3. **MTAData**: This app that will give the user data on how far long the user will have to wait for trains to arrive to stations provided by the specified by the user.
 
