@@ -38,11 +38,17 @@ Step 2: Evaluating App Ideas
 ### 1.  WeatherToday
 
 **Description**: This app would allow the user to keep track of the weather at their current location or other location that they are interested in.
+
 **Category:** Utility
+
 **Mobile**: This app will be designed to make it easy to get all your weather data in nice compact format on the go and at any time.
+
 **Story**: Imagine wanting to go outside but you don't know what the weather looks like. WeatherToday will quickly inform you of the weather at your fingertips.
+
 **Market**: Everyone can benefit from using this app because everyone needs to know what the weather is like for their location before going outside.
+
 **Habit**: This app would be opened and used everytime a person wanted to go outside or make plans, as it is very important to know what the weather is like outside before making any plans or going outside. The average user would just use this app to know what the weather will be like.
+
 **Scope**: V1 would be pretty straightforward and only contain the weather and temperature of a single location that is specified by the user. V2 would add the ability to add and save multiple locations weather and temperature for easy viewing. V3 would make the app more visually appealing.
 
 
