@@ -35,7 +35,12 @@ Sajed Atwa
 Step 2: Evaluating App Ideas
 =
 ## Step 2a: Choose the top three
-### 1.  WeatherToday
+1. **Weathernaut**
+2. **PlantPal**
+3. **GasNow**
+
+## Step 2b: Evaluate ideas
+### 1.  Weathernaut
 
 **Description**: This app would allow the user to keep track of the weather at their current location or other location that they are interested in.
 
@@ -43,7 +48,7 @@ Step 2: Evaluating App Ideas
 
 **Mobile**: This app will be designed to make it easy to get all your weather data in nice compact format on the go and at any time.
 
-**Story**: Imagine wanting to go outside but you don't know what the weather looks like. WeatherToday will quickly inform you of the weather at your fingertips.
+**Story**: Imagine wanting to go outside but you don't know what the weather looks like. Weathernaut will quickly inform you of the weather at your fingertips.
 
 **Market**: Everyone can benefit from using this app because everyone needs to know what the weather is like for their location before going outside.
 
