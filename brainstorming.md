@@ -55,21 +55,33 @@ Step 2: Evaluating App Ideas
 ### 2.  PlantPal
 
 **Description**:Allows plant lovers and newcomers to have a easier time to taking care of their plants. It reminds them to take care of the plants when it is time to to ensure that the plant stays healthy.
+
 **Category:** Productivity 
+
 **Mobile**: It will be specifically designed for mobile devices with the features such as identifying plants and provide more accurate care information with their plants.
+
 **Story**: More people will be interested in gardening and plant care as a way to connect with nature, and it could also have a social aspect, allowing user to share their progress with connection or other plant users.
+
 **Market**: This app would be perfect for plant lovers and people who are interested in learning more about plants. This app would help them that process easier, because it helps them learn about the plant and also when to water their plant to ensure that the plant stays healthy.
+
 **Habit**: The user would be checking the app when they want to look when they should water the plant next to help the plant get enough water but not overflowing with water. If the user has a couple of plants they might check once a day but if the user has multiple plants they would check multiple time of days to make sure they properly taken care of the plant.
+
 **Scope** : This app is quite technical as it involves either finding an api or finding software that will identify plants based on the camera. A stripped down version of this app would only include a reminder feature which would still require you to have an api of plants and how to care for them. This would be a interesting app to build even without the feature to identify plants using the camera.
 
 ### 3.  GasNow
 
 **Description**: This app will be paired up with the user's vehicle and detect the amount of fuel or gas in the vehicle, in which case it will deliver gas if the vehicle does not have any or if it detects less fuel.
+
 **Category:** Utility
+
 **Mobile:** When you need gas delivered to your location ordering from your phone will be the most convient since you just input your data and request gas with a few clicks.
+
 **Story:** Sometimes you might run out of gas in the middle of nowhere, and the nearest gas station is far away from your location. This app will let you worry less and bring the hope of getting your vehicle gas at your location in no time.
+
 **Market** : Everyone can utilize this app to its full potential and benefit from its feature of being able to detect your location when gas is absent from the vehicle.
+
 **Habit**: This app will be automated with the vehicle when fuel is low, and it will notify the user of the level of fuel. Thus, it will not be frequent or addictive; however, there needs to be a certain level of habit with this app.
+
 **Scope** : It would be challenges such as integrating with gas delivery services, payment, real-time delivery status. 
 
 ## Step 2c: Make the final decision
