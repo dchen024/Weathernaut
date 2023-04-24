@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Weathernaut</string>
+    <string name="weather">Weather</string>
+    <string name="cityName">Search for a city</string>
+    <string name="weatherButton">Get weather</string>
+    <string name="temperature">Temperature</string>
+    <string name="sunset">sunset</string>
+    <string name="sunrise">sunrise</string>
 </resources>
+
