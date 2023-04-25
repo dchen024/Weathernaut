@@ -6,12 +6,16 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.pokeapirecyclerview.WeatherAdapter
 import okhttp3.*
 import org.json.JSONObject
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 
+data class WeatherData(val Cityname: String, val temp: String, val sunrise: Long, val sunset: Long)
 class MainActivity : AppCompatActivity() {
     private val client = OkHttpClient()
     private val url = "https://api.openweathermap.org/data/2.5/weather"
@@ -22,6 +26,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var tempTextView: TextView
     private lateinit var sunsetTextView: TextView
     private lateinit var sunriseTextView: TextView
+    private lateinit var weatherList: MutableList<WeatherData>
+    private lateinit var rvweather: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,13 +38,20 @@ class MainActivity : AppCompatActivity() {
         tempTextView = findViewById(R.id.tempTextView)
         sunsetTextView = findViewById(R.id.sunsetTextView)
         sunriseTextView = findViewById(R.id.sunriseTextView)
+        rvweather = findViewById(R.id.weather_list)
+        weatherList = mutableListOf()
+
+        val cities = listOf("New York", "Los Angeles", "Houston", "Phoenix", "San Antonio") // Replace with actual city names
+        for (city in cities) {
+            searchCityWeather(city)
+        }
 
         searchButton.setOnClickListener {
             val cityName = searchBarEditText.text.toString()
             searchCityWeather(cityName)
         }
     }
-
+    private var cityCount = 0 // Add this variable to keep track of city count
     private fun searchCityWeather(cityName: String) {
         val url = "$url?q=$cityName&appid=$apiKey&units=imperial"
         val request = Request.Builder()
@@ -64,7 +77,21 @@ class MainActivity : AppCompatActivity() {
                     sunriseTextView.text = "Sunrise: ${formatTime(sunriseTime)}"
                     sunsetTextView.text = "Sunset: ${formatTime(sunsetTime)}"
                 }
+
+                val weatherData = WeatherData(cityName, temp, sunriseTime, sunsetTime)
+                if (cityCount < 5) {
+                    weatherList.add(weatherData)
+                    cityCount++
+                }
+                if (cityCount == 5) {
+                    runOnUiThread {
+                        val adapter = WeatherAdapter(weatherList)
+                        rvweather.adapter = adapter
+                        rvweather.layoutManager = LinearLayoutManager(this@MainActivity)
+                    }
+                }
             }
+
         })
     }
 

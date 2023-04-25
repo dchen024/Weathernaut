@@ -19,8 +19,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/searchBarEditText"
@@ -29,6 +28,7 @@
         android:layout_marginStart="20dp"
         android:hint="@string/cityName"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf = "@id/weatherTextView"
         android:inputType="text" />
 
     <Button
@@ -40,33 +40,35 @@
 
     <TextView
         android:id="@+id/tempTextView"
-        android:layout_width="360dp"
-        android:layout_height="260dp"
+        android:layout_width="300dp"
+        android:layout_height="44dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:text="@string/temperature"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:ignore="MissingConstraints"
-        />
+        app:layout_constraintTop_toBottomOf = "@id/searchButton" />
 
     <TextView
         android:id="@+id/sunsetTextView"
-        android:layout_width="360dp"
-        android:layout_height="80dp"
+        android:layout_width="303dp"
+        android:layout_height="51dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:text="@string/sunset"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:ignore="MissingConstraints"
-        />
+        app:layout_constraintTop_toBottomOf = "@id/tempTextView" />
+
     <TextView
         android:id="@+id/sunriseTextView"
-        android:layout_width="360dp"
-        android:layout_height="80dp"
+        android:layout_width="308dp"
+        android:layout_height="52dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:text="@string/sunrise"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:ignore="MissingConstraints"
-        />
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/weather_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 </LinearLayout>
