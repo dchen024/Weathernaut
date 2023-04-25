@@ -26,6 +26,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var tempTextView: TextView
     private lateinit var sunsetTextView: TextView
     private lateinit var sunriseTextView: TextView
+    private lateinit var favoriteButton : Button
+    private lateinit var removeButton : Button
     private lateinit var weatherList: MutableList<WeatherData>
     private lateinit var rvweather: RecyclerView
 
@@ -39,6 +41,8 @@ class MainActivity : AppCompatActivity() {
         sunsetTextView = findViewById(R.id.sunsetTextView)
         sunriseTextView = findViewById(R.id.sunriseTextView)
         rvweather = findViewById(R.id.weather_list)
+        favoriteButton = findViewById(R.id.favoriteButton)
+        removeButton = findViewById(R.id.removeButton)
         weatherList = mutableListOf()
 
         val cities = listOf("New York", "Los Angeles", "Houston", "Phoenix", "San Antonio") // Replace with actual city names
@@ -50,6 +54,53 @@ class MainActivity : AppCompatActivity() {
             val cityName = searchBarEditText.text.toString()
             searchCityWeather(cityName)
         }
+
+        //Add city to recycler view
+        favoriteButton.setOnClickListener {
+            val cityName = searchBarEditText.text.toString()
+            val url = "$url?q=$cityName&appid=$apiKey&units=imperial"
+            val request = Request.Builder()
+                .url(url)
+                .build()
+
+            client.newCall(request).enqueue(object : Callback {
+                override fun onFailure(call: Call, e: IOException) {
+                    e.printStackTrace()
+                }
+
+                override fun onResponse(call: Call, response: Response) {
+                    val body = response.body?.string()
+                    val json = JSONObject(body)
+                    val main = json.getJSONObject("main")
+                    val temp = main.getString("temp")
+                    val sunriseTime = json.getJSONObject("sys").getString("sunrise").toLong()
+                    val sunsetTime = json.getJSONObject("sys").getString("sunset").toLong()
+
+                    val weatherData = WeatherData(cityName, temp, sunriseTime, sunsetTime)
+                    weatherList.add(weatherData)
+
+                    runOnUiThread {
+                        val adapter = WeatherAdapter(weatherList)
+                        rvweather.adapter = adapter
+                        rvweather.layoutManager = LinearLayoutManager(this@MainActivity)
+                    }
+                }
+            })
+        }
+        //Remove City from recycler view
+        removeButton.setOnClickListener {
+            val cityToRemove = searchBarEditText.text.toString()
+            for (i in weatherList.indices) {
+                if (weatherList[i].Cityname == cityToRemove) {
+                    weatherList.removeAt(i)
+                    break
+                }
+            }
+            val adapter = WeatherAdapter(weatherList)
+            rvweather.adapter = adapter
+            rvweather.layoutManager = LinearLayoutManager(this@MainActivity)
+        }
+
     }
     private var cityCount = 0 // Add this variable to keep track of city count
     private fun searchCityWeather(cityName: String) {

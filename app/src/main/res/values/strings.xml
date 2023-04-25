@@ -6,5 +6,7 @@
     <string name="temperature">Temperature</string>
     <string name="sunset">sunset</string>
     <string name="sunrise">sunrise</string>
+    <string name="favoriteButton">Favorite City</string>
+    <string name="remove_button">Remove City</string>
 </resources>
 

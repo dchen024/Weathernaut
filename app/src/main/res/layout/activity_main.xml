@@ -38,6 +38,20 @@
         android:layout_marginStart="20dp"
         android:text="@string/weatherButton" />
 
+    <Button
+        android:id="@+id/favoriteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="@string/favoriteButton" />
+
+    <Button
+        android:id="@+id/removeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="@string/remove_button" />
+
     <TextView
         android:id="@+id/tempTextView"
         android:layout_width="300dp"
