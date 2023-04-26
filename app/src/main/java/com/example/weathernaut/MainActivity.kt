@@ -1,17 +1,21 @@
 package com.example.weathernaut
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pokeapirecyclerview.WeatherAdapter
 import okhttp3.*
 import org.json.JSONObject
 import java.io.IOException
+import java.net.URLEncoder
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -23,13 +27,12 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var searchBarEditText: EditText
     private lateinit var searchButton: Button
-    private lateinit var tempTextView: TextView
-    private lateinit var sunsetTextView: TextView
-    private lateinit var sunriseTextView: TextView
     private lateinit var favoriteButton : Button
     private lateinit var removeButton : Button
     private lateinit var weatherList: MutableList<WeatherData>
     private lateinit var rvweather: RecyclerView
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,9 +40,6 @@ class MainActivity : AppCompatActivity() {
 
         searchBarEditText = findViewById(R.id.searchBarEditText)
         searchButton = findViewById(R.id.searchButton)
-        tempTextView = findViewById(R.id.tempTextView)
-        sunsetTextView = findViewById(R.id.sunsetTextView)
-        sunriseTextView = findViewById(R.id.sunriseTextView)
         rvweather = findViewById(R.id.weather_list)
         favoriteButton = findViewById(R.id.favoriteButton)
         removeButton = findViewById(R.id.removeButton)
@@ -51,17 +51,20 @@ class MainActivity : AppCompatActivity() {
         }
 
         searchButton.setOnClickListener {
-            val cityName = searchBarEditText.text.toString()
-            searchCityWeather(cityName)
+            val cityName = URLEncoder.encode(searchBarEditText.text.toString(),"UTF-8")
+            callDetailedActivity()
+
+            Log.d("URL","$url?q=$cityName&appid=$apiKey&units=imperial")
         }
 
         //Add city to recycler view
         favoriteButton.setOnClickListener {
-            val cityName = searchBarEditText.text.toString()
+            val cityName = URLEncoder.encode(searchBarEditText.text.toString(),"UTF-8")
             val url = "$url?q=$cityName&appid=$apiKey&units=imperial"
             val request = Request.Builder()
                 .url(url)
                 .build()
+
 
             client.newCall(request).enqueue(object : Callback {
                 override fun onFailure(call: Call, e: IOException) {
@@ -100,9 +103,20 @@ class MainActivity : AppCompatActivity() {
             rvweather.adapter = adapter
             rvweather.layoutManager = LinearLayoutManager(this@MainActivity)
         }
-
     }
+
+    private fun callDetailedActivity() { //Used to pass city name to DetailedActivity.kt
+        val editText = findViewById<EditText>(R.id.searchBarEditText)
+        val message = editText.text.toString()
+
+        val intent = Intent(this,DetailedActivity::class.java).also{
+            it.putExtra("CITY_NAME", message)
+            startActivity(it)
+        }
+    }
+
     private var cityCount = 0 // Add this variable to keep track of city count
+                                // We can also just do the size of the mutablelist to find number of cities. -Daniel
     private fun searchCityWeather(cityName: String) {
         val url = "$url?q=$cityName&appid=$apiKey&units=imperial"
         val request = Request.Builder()
@@ -123,11 +137,6 @@ class MainActivity : AppCompatActivity() {
                 val sunriseTime = json.getJSONObject("sys").getString("sunrise").toLong()
                 val sunsetTime = json.getJSONObject("sys").getString("sunset").toLong()
 
-                runOnUiThread {
-                    tempTextView.text = "Temperature: ${temp}°F"
-                    sunriseTextView.text = "Sunrise: ${formatTime(sunriseTime)}"
-                    sunsetTextView.text = "Sunset: ${formatTime(sunsetTime)}"
-                }
 
                 val weatherData = WeatherData(cityName, temp, sunriseTime, sunsetTime)
                 if (cityCount < 5) {
