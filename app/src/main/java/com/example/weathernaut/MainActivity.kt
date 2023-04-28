@@ -173,4 +173,36 @@ class MainActivity : AppCompatActivity() {
         })
         return future.get()
     }
+    //Update RecyclerView if city was added or removed
+    override fun onRestart() {
+        super.onRestart()
+        setContentView(R.layout.activity_main)
+
+        searchBarEditText = findViewById(R.id.searchBarEditText)
+        searchButton = findViewById(R.id.searchButton)
+
+        rvweather = findViewById(R.id.weather_list)                     //RecyclerView
+        weatherList = mutableListOf()                                   //RecyclerView
+
+        /**Retrieves cities from persistent state in [MyPreferences]*/
+        val savedCities = MyPreferences.getCities(this)
+
+        for (city in savedCities) {                                 //RecyclerView
+            val cityName = URLEncoder.encode(city,"UTF-8")
+            searchCityWeather(cityName)
+        }
+
+        searchButton.setOnClickListener {
+            //formats text to be URL compatible
+            val cityName = URLEncoder.encode(searchBarEditText.text.toString(),"UTF-8")
+
+            if(isCityFound(cityName)){ //prevents DetailedActivity from opening when city is not found
+                callDetailedActivity()
+            }
+            else{
+                Toast.makeText(applicationContext,"Your city could not be found",Toast.LENGTH_LONG).show()
+            }
+        }
+    }
+
 }
