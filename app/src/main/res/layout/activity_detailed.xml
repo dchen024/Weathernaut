@@ -16,8 +16,9 @@
         android:text="@string/CityName"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:textSize="30sp"
+        android:textSize="40sp"
         android:textStyle="bold"
+        android:textColor="@color/black"
         android:layout_marginTop="10sp"/>
 
     <ImageView
@@ -33,15 +34,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/temperature"
+        android:layout_marginTop="10sp"
+        android:textColor="@color/black"
+        android:textSize="20sp"
         app:layout_constraintTop_toBottomOf="@id/icon"
-        app:layout_constraintStart_toStartOf="parent"/>
-
-    <TextView
-        android:id="@+id/sunsetTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/sunset"
-        app:layout_constraintTop_toBottomOf="@id/tempTextView"
         app:layout_constraintStart_toStartOf="parent"/>
 
     <TextView
@@ -49,22 +45,43 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/sunrise"
-        app:layout_constraintTop_toBottomOf="@id/sunsetTextView"
+        android:layout_marginTop="10sp"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@id/tempTextView"
         app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/sunsetTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sunset"
+        android:layout_marginTop="10sp"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@id/sunriseTextView"
+        app:layout_constraintStart_toStartOf="parent"/>
+
 
     <TextView
         android:id="@+id/descriptionTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/description"
+        android:layout_marginTop="10sp"
+        android:textColor="@color/black"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/sunriseTextView"/>
+        app:layout_constraintTop_toBottomOf="@id/sunsetTextView"/>
 
     <TextView
         android:id="@+id/feels_likeTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/feels_like"
+        android:layout_marginTop="10sp"
+        android:textColor="@color/black"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/descriptionTextView"/>
 
@@ -73,6 +90,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/temp_min"
+        android:layout_marginTop="10sp"
+        android:textColor="@color/black"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/feels_likeTextView"/>
 
@@ -81,6 +101,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/temp_max"
+        android:layout_marginTop="10sp"
+        android:textColor="@color/black"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/temp_minTextView"/>
 

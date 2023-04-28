@@ -1,57 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/cityname"
-        android:layout_width="244dp"
-        android:layout_height="38dp"
-        android:textAlignment="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/CityName"
+        android:textAlignment="textStart"
         android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.525"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/icon"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/temperature"
-        android:layout_width="236dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="16dp"
-        android:textAlignment="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="textStart"
+        android:text="100"
         android:textColor="@color/black"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/cityname"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="10sp"/>
+
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/_01d"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <!--
+    <TextView
+        android:id="@+id/borderB"
+        android:layout_width="match_parent"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cityname" />
+        android:background="@color/black"
+        android:layout_height="2sp"
+        app:layout_constraintTop_toBottomOf="@id/icon"/>
+    -->
 
     <TextView
-        android:id="@+id/sunset"
-        android:layout_width="235dp"
-        android:layout_height="41dp"
-        android:layout_marginTop="18dp"
-        android:textAlignment="center"
-        android:textColor="@color/black"
+        android:id="@+id/borderT"
+        android:layout_width="match_parent"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/temperature" />
+        android:background="@color/black"
+        android:layout_height="2sp"
+        app:layout_constraintTop_toTopOf="parent"/>
 
-    <TextView
-        android:id="@+id/sunrise"
-        android:layout_width="233dp"
-        android:layout_height="36dp"
-        android:layout_marginTop="18dp"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/sunset" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

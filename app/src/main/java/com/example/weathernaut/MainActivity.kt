@@ -131,7 +131,7 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    private fun isCityFound(cityName: String): Boolean { //Used to prevent going to DetailedActivity when city is not found
+    private fun isCityFound(cityName: String): Boolean { //Used to prevent going to DetailedActivity when city not found
         val url = "$url?q=$cityName&appid=$apiKey&units=imperial"
         val request = Request.Builder()
             .url(url)
@@ -160,11 +160,4 @@ class MainActivity : AppCompatActivity() {
         return future.get()
     }
 
-
-    @SuppressLint("SimpleDateFormat")
-    private fun formatTime(timestamp: Long): String {
-        val dateFormat = SimpleDateFormat("hh:mm:ss a", Locale.getDefault())
-        val date = Date(timestamp * 1000)
-        return dateFormat.format(date)
-    }
 }

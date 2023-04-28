@@ -18,8 +18,7 @@ import java.util.*
 
         /*
         TODO:
-        3) Move Favorite and Remove Buttons to DetailedActivity.kt
-        4) Add toast in DetailedActivity.kt when city name is spelled wrong
+        -Move Favorite and Remove Buttons to DetailedActivity.kt
          */
 
 class DetailedActivity : AppCompatActivity() {
@@ -87,38 +86,41 @@ class DetailedActivity : AppCompatActivity() {
                 else{
                     val main = json.getJSONObject("main")
                     val temp = main.getString("temp")
-                    val sunriseTime = json.getJSONObject("sys").getString("sunrise").toLong()
-                    val sunsetTime = json.getJSONObject("sys").getString("sunset").toLong()
+                    val sunriseTime = json.getJSONObject("sys").getLong("sunrise")
+                    val sunsetTime = json.getJSONObject("sys").getLong("sunset")
                     val cityname = json.getString("name")
                     val description = json.getJSONArray("weather").getJSONObject(0).getString("description")
                     val feelslike = main.getString("feels_like")
                     val tempmin = main.getString("temp_min")
                     val tempmax = main.getString("temp_max")
                     val icon = json.getJSONArray("weather").getJSONObject(0).getString("icon")
+                    val timezone = json.getLong("timezone")
                     Log.d("WeatherIcon", icon)
 
 
                     runOnUiThread {
                         tempTextView.text = "Temperature: ${temp}°F"
-                        sunriseTextView.text = "Sunrise: ${formatTime(sunriseTime)}"
-                        sunsetTextView.text = "Sunset: ${formatTime(sunsetTime)}"
+                        sunriseTextView.text = "Sunrise: ${formatTime(sunriseTime + timezone)}"
+                        sunsetTextView.text = "Sunset: ${formatTime(sunsetTime + timezone)}"
                         cityNameTextView.text = "${cityname}"
                         descriptionTextView.text = "Description: ${description}"
                         feelslikeTextView.text = "Feels Like: ${feelslike}°F"
                         tempminTextView.text = "Temp Min: ${tempmin}°F"
                         tempmaxTextView.text = "Temp Max: ${tempmax}°F"
 
-                        when (icon) {
-                            "01n" -> iconImageView.setImageDrawable(AppCompatResources.getDrawable(this@DetailedActivity, R.drawable._01d))
-                            "02n" -> iconImageView.setImageDrawable(AppCompatResources.getDrawable(this@DetailedActivity, R.drawable._02d))
-                            "03n" -> iconImageView.setImageDrawable(AppCompatResources.getDrawable(this@DetailedActivity, R.drawable._03d))
-                            "04n" -> iconImageView.setImageDrawable(AppCompatResources.getDrawable(this@DetailedActivity, R.drawable._04d))
-                            "09n" -> iconImageView.setImageDrawable(AppCompatResources.getDrawable(this@DetailedActivity, R.drawable._09d))
-                            "10n" -> iconImageView.setImageDrawable(AppCompatResources.getDrawable(this@DetailedActivity, R.drawable._10d))
-                            "11n" -> iconImageView.setImageDrawable(AppCompatResources.getDrawable(this@DetailedActivity, R.drawable._11d))
-                            "13n" -> iconImageView.setImageDrawable(AppCompatResources.getDrawable(this@DetailedActivity, R.drawable._13d))
-                            "50n" -> iconImageView.setImageDrawable(AppCompatResources.getDrawable(this@DetailedActivity, R.drawable._50d))
+                        var iconCheck = when (icon) {
+                            "01n" -> R.drawable._01d
+                            "02n" -> R.drawable._02d
+                            "03n" -> R.drawable._03d
+                            "04n" -> R.drawable._04d
+                            "09n" -> R.drawable._09d
+                            "10n" -> R.drawable._10d
+                            "11n" -> R.drawable._11d
+                            "13n" -> R.drawable._13d
+                            "50n" -> R.drawable._50d
+                            else  -> null
                         }
+                        iconImageView.setImageDrawable(AppCompatResources.getDrawable(this@DetailedActivity, iconCheck!!))
                     }
                 }
             }
@@ -129,7 +131,9 @@ class DetailedActivity : AppCompatActivity() {
     @SuppressLint("SimpleDateFormat")
     private fun formatTime(timestamp: Long): String {
         val dateFormat = SimpleDateFormat("hh:mm:ss a", Locale.getDefault())
+        dateFormat.timeZone = TimeZone.getTimeZone("UTC")
         val date = Date(timestamp * 1000)
         return dateFormat.format(date)
     }
+
 }
