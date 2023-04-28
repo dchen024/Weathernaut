@@ -4,13 +4,13 @@
     <string name="CityName">City Name</string>
     <string name="weatherButton">Search</string>
     <string name="temperature">Temperature</string>
-    <string name="sunset">sunset</string>
-    <string name="sunrise">sunrise</string>
+    <string name="sunset">Sunset</string>
+    <string name="sunrise">Sunrise</string>
     <string name="favoriteButton">Favorite</string>
     <string name="unfavoriteButton">Unfavorite</string>
-    <string name="description">description</string>
-    <string name="feels_like">feels_like</string>
-    <string name="temp_min">temp_min</string>
-    <string name="temp_max">temp_max</string>
+    <string name="description">Description</string>
+    <string name="feels_like">Feels_like</string>
+    <string name="temp_min">Temp_min</string>
+    <string name="temp_max">Temp_max</string>
 </resources>
 

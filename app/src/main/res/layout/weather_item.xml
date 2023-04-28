@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@drawable/istockphoto_1182882421_612x612"
     android:layout_height="wrap_content">
 
     <TextView
@@ -13,6 +14,8 @@
         android:textAlignment="textStart"
         android:textColor="@color/black"
         android:textSize="24sp"
+        android:fontFamily="@font/city"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/icon"
         app:layout_constraintTop_toTopOf="parent" />
@@ -24,6 +27,7 @@
         android:textAlignment="textStart"
         android:text="100"
         android:textColor="@color/black"
+        android:fontFamily="@font/bungee"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/cityname"

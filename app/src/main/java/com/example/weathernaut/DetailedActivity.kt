@@ -171,6 +171,7 @@ class DetailedActivity : AppCompatActivity() {
             Log.d("addCity", "$city_name")
             addCity(this,city_name)
             favoriteButton.text = getString(R.string.unfavoriteButton)
+
         }
     }
 
