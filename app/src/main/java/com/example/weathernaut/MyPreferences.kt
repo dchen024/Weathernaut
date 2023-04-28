@@ -4,6 +4,7 @@ import android.util.Log
 
 class MyPreferences {
     companion object {
+        //only configures cities for first time users
         val cities = setOf("New York", "London", "Tokyo", "Beijing", "Dubai", "Moscow")
 
         fun saveCities(context: Context, cities: Set<String>) {
@@ -20,14 +21,14 @@ class MyPreferences {
             val cities = getCities(context).toMutableSet()
             cities.remove(city)
             saveCities(context, cities)
-            Log.d("removeCity", "$cities")
+            //Log.d("removeCity", "$cities")
         }
 
         fun addCity(context: Context, city: String) {
             val cities = getCities(context).toMutableSet()
             cities.add(city)
             saveCities(context, cities)
-            Log.d("addCity", "$cities")
+            //Log.d("addCity", "$cities")
         }
     }
 }

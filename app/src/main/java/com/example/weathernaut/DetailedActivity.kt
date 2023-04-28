@@ -163,13 +163,13 @@ class DetailedActivity : AppCompatActivity() {
     private fun favoriteCity(city_name:String){
         Log.d("addCity", "$city_name")
         if(getCities(this).contains(city_name)){
-            Log.d("removeCity", "$city_name")
+            //Log.d("removeCity", "$city_name")
             removeCity(this,city_name)
             favoriteButton.text = getString(R.string.favoriteButton)
         }
         else{
             Log.d("addCity", "$city_name")
-            addCity(this,city_name)
+            //addCity(this,city_name)
             favoriteButton.text = getString(R.string.unfavoriteButton)
         }
     }

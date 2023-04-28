@@ -131,7 +131,7 @@ class MainActivity : AppCompatActivity() {
                     }
 
                     val temp = main.getDouble("temp")           //RecyclerView
-                    Log.d("icon", icon)
+                    //Log.d("icon", icon)
                     val weatherData = WeatherData(nameOfCity,temp,iconCheck!!)     //RecyclerView
 
                     weatherList.add(weatherData) //RecyclerView
@@ -204,5 +204,4 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
 }
