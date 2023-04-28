@@ -3,6 +3,8 @@ package com.example.weathernaut
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
@@ -71,46 +73,59 @@ class DetailedActivity : AppCompatActivity() {
 
                 val body = response.body?.string()
                 val json = JSONObject(body)
-                val main = json.getJSONObject("main")
-                val temp = main.getString("temp")
-                val sunriseTime = json.getJSONObject("sys").getString("sunrise").toLong()
-                val sunsetTime = json.getJSONObject("sys").getString("sunset").toLong()
-                val cityname = json.getString("name")
-                val description = json.getJSONArray("weather").getJSONObject(0).getString("description")
-                val feelslike = main.getString("feels_like")
-                val tempmin = main.getString("temp_min")
-                val tempmax = main.getString("temp_max")
-                val icon = json.getJSONArray("weather").getJSONObject(0).getString("icon")
-                Log.d("WeatherIcon", icon)
+                val code = json.getString("cod")
 
-
-                runOnUiThread {
-                    tempTextView.text = "Temperature: ${temp}°F"
-                    sunriseTextView.text = "Sunrise: ${formatTime(sunriseTime)}"
-                    sunsetTextView.text = "Sunset: ${formatTime(sunsetTime)}"
-                    cityNameTextView.text = "${cityname}"
-                    descriptionTextView.text = "Description: ${description}"
-                    feelslikeTextView.text = "Feels Like: ${feelslike}°F"
-                    tempminTextView.text = "Temp Min: ${tempmin}°F"
-                    tempmaxTextView.text = "Temp Max: ${tempmax}°F"
-
-                    when (icon) {
-                        "01n" -> iconImageView.setImageDrawable(AppCompatResources.getDrawable(this@DetailedActivity, R.drawable._01d))
-                        "02n" -> iconImageView.setImageDrawable(AppCompatResources.getDrawable(this@DetailedActivity, R.drawable._02d))
-                        "03n" -> iconImageView.setImageDrawable(AppCompatResources.getDrawable(this@DetailedActivity, R.drawable._03d))
-                        "04n" -> iconImageView.setImageDrawable(AppCompatResources.getDrawable(this@DetailedActivity, R.drawable._04d))
-                        "09n" -> iconImageView.setImageDrawable(AppCompatResources.getDrawable(this@DetailedActivity, R.drawable._09d))
-                        "10n" -> iconImageView.setImageDrawable(AppCompatResources.getDrawable(this@DetailedActivity, R.drawable._10d))
-                        "11n" -> iconImageView.setImageDrawable(AppCompatResources.getDrawable(this@DetailedActivity, R.drawable._11d))
-                        "13n" -> iconImageView.setImageDrawable(AppCompatResources.getDrawable(this@DetailedActivity, R.drawable._13d))
-                        "50n" -> iconImageView.setImageDrawable(AppCompatResources.getDrawable(this@DetailedActivity, R.drawable._50d))
+                if(code != "200") {
+                    Handler(Looper.getMainLooper()).post {
+                    Toast.makeText(
+                        applicationContext,
+                        "Your city could not be found",
+                        Toast.LENGTH_LONG
+                    ).show()
                     }
                 }
+                else{
+                    val main = json.getJSONObject("main")
+                    val temp = main.getString("temp")
+                    val sunriseTime = json.getJSONObject("sys").getString("sunrise").toLong()
+                    val sunsetTime = json.getJSONObject("sys").getString("sunset").toLong()
+                    val cityname = json.getString("name")
+                    val description = json.getJSONArray("weather").getJSONObject(0).getString("description")
+                    val feelslike = main.getString("feels_like")
+                    val tempmin = main.getString("temp_min")
+                    val tempmax = main.getString("temp_max")
+                    val icon = json.getJSONArray("weather").getJSONObject(0).getString("icon")
+                    Log.d("WeatherIcon", icon)
 
+
+                    runOnUiThread {
+                        tempTextView.text = "Temperature: ${temp}°F"
+                        sunriseTextView.text = "Sunrise: ${formatTime(sunriseTime)}"
+                        sunsetTextView.text = "Sunset: ${formatTime(sunsetTime)}"
+                        cityNameTextView.text = "${cityname}"
+                        descriptionTextView.text = "Description: ${description}"
+                        feelslikeTextView.text = "Feels Like: ${feelslike}°F"
+                        tempminTextView.text = "Temp Min: ${tempmin}°F"
+                        tempmaxTextView.text = "Temp Max: ${tempmax}°F"
+
+                        when (icon) {
+                            "01n" -> iconImageView.setImageDrawable(AppCompatResources.getDrawable(this@DetailedActivity, R.drawable._01d))
+                            "02n" -> iconImageView.setImageDrawable(AppCompatResources.getDrawable(this@DetailedActivity, R.drawable._02d))
+                            "03n" -> iconImageView.setImageDrawable(AppCompatResources.getDrawable(this@DetailedActivity, R.drawable._03d))
+                            "04n" -> iconImageView.setImageDrawable(AppCompatResources.getDrawable(this@DetailedActivity, R.drawable._04d))
+                            "09n" -> iconImageView.setImageDrawable(AppCompatResources.getDrawable(this@DetailedActivity, R.drawable._09d))
+                            "10n" -> iconImageView.setImageDrawable(AppCompatResources.getDrawable(this@DetailedActivity, R.drawable._10d))
+                            "11n" -> iconImageView.setImageDrawable(AppCompatResources.getDrawable(this@DetailedActivity, R.drawable._11d))
+                            "13n" -> iconImageView.setImageDrawable(AppCompatResources.getDrawable(this@DetailedActivity, R.drawable._13d))
+                            "50n" -> iconImageView.setImageDrawable(AppCompatResources.getDrawable(this@DetailedActivity, R.drawable._50d))
+                        }
+                    }
+                }
             }
 
         })
     }
+
     @SuppressLint("SimpleDateFormat")
     private fun formatTime(timestamp: Long): String {
         val dateFormat = SimpleDateFormat("hh:mm:ss a", Locale.getDefault())
