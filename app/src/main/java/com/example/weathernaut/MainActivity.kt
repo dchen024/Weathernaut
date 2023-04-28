@@ -23,18 +23,17 @@ import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.CompletableFuture
 
-data class WeatherData(val Cityname: String, val temp: String, val sunrise: Long, val sunset: Long)
+data class WeatherData(val cityName: String, val temp: Double, val iconCheck:Int)
 class MainActivity : AppCompatActivity() {
-    private val client = OkHttpClient()
-    private val url = "https://api.openweathermap.org/data/2.5/weather"
-    private val apiKey = "13e14e0c8b68f04c958f100877a0a805"
+    private val client = OkHttpClient()                                 //Used for API
+    private val url = "https://api.openweathermap.org/data/2.5/weather" //Used for API
+    private val apiKey = "13e14e0c8b68f04c958f100877a0a805"             //Used for API
 
     private lateinit var searchBarEditText: EditText
     private lateinit var searchButton: Button
-    private lateinit var weatherList: MutableList<WeatherData>
-    private lateinit var rvweather: RecyclerView
 
-
+    private lateinit var weatherList: MutableList<WeatherData> //RecyclerView
+    private lateinit var rvweather: RecyclerView               //RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,30 +41,31 @@ class MainActivity : AppCompatActivity() {
 
         searchBarEditText = findViewById(R.id.searchBarEditText)
         searchButton = findViewById(R.id.searchButton)
-        rvweather = findViewById(R.id.weather_list)
 
-        weatherList = mutableListOf()
+        rvweather = findViewById(R.id.weather_list)                     //RecyclerView
+        weatherList = mutableListOf()                                   //RecyclerView
 
-        val cities = listOf("New York", "Los Angeles", "Houston", "Phoenix", "San Antonio") // Replace with actual city names
-        for (city in cities) {
-            searchCityWeather(city)
+        /**Retrieves cities from persistent state in [MyPreferences]*/
+        val savedCities = MyPreferences.getCities(this)
+
+        for (city in savedCities) {                                 //RecyclerView
+            val cityName = URLEncoder.encode(city,"UTF-8")
+            searchCityWeather(cityName)
         }
 
         searchButton.setOnClickListener {
+            //formats text to be URL compatible
             val cityName = URLEncoder.encode(searchBarEditText.text.toString(),"UTF-8")
 
-            if(isCityFound(cityName) == false){
-                Toast.makeText(applicationContext,"Your city could not be found",Toast.LENGTH_LONG).show()
-            }
-            else if(isCityFound(cityName) == true){
+            if(isCityFound(cityName)){ //prevents DetailedActivity from opening when city is not found
                 callDetailedActivity()
             }
-
-            Log.d("URL","$url?q=$cityName&appid=$apiKey&units=imperial")
+            else{
+                Toast.makeText(applicationContext,"Your city could not be found",Toast.LENGTH_LONG).show()
+            }
+            //Log.d("URL","$url?q=$cityName&appid=$apiKey&units=imperial")
         }
-
     }
-
     private fun callDetailedActivity() { //Used to pass city name to DetailedActivity.kt
         val editText = findViewById<EditText>(R.id.searchBarEditText)
         val message = editText.text.toString()
@@ -75,15 +75,11 @@ class MainActivity : AppCompatActivity() {
             startActivity(it)
         }
     }
-
-    private var cityCount = 0 // Add this variable to keep track of city count
-                                // We can also just do the size of the mutablelist to find number of cities. -Daniel
     private fun searchCityWeather(cityName: String) {
         val url = "$url?q=$cityName&appid=$apiKey&units=imperial"
         val request = Request.Builder()
             .url(url)
             .build()
-
 
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
@@ -97,9 +93,11 @@ class MainActivity : AppCompatActivity() {
                 val json = JSONObject(body)
                 val main = json.getJSONObject("main")
 
-                val code = json.getString("cod")
+                val code = json.getInt("cod")
+                val nameOfCity = json.getString("name")
+                val icon = json.getJSONArray("weather").getJSONObject(0).getString("icon")
 
-                if(code != "200") {
+                if(code != 200) { //200 means request is successful
                     Handler(Looper.getMainLooper()).post {
                         Toast.makeText(
                             applicationContext,
@@ -109,25 +107,42 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
                 else {
-                    val temp = main.getString("temp")
-                    val sunriseTime = json.getJSONObject("sys").getString("sunrise").toLong()
-                    val sunsetTime = json.getJSONObject("sys").getString("sunset").toLong()
+                    var iconCheck = when (icon) {
+                        "01n" -> R.drawable._01n
+                        "02n" -> R.drawable._02n
+                        "03n" -> R.drawable._03n
+                        "04n" -> R.drawable._04n
+                        "09n" -> R.drawable._09n
+                        "10n" -> R.drawable._10n
+                        "11n" -> R.drawable._11n
+                        "13n" -> R.drawable._13n
+                        "50n" -> R.drawable._50n
 
-                    val weatherData = WeatherData(cityName, temp, sunriseTime, sunsetTime)
-                    if (cityCount < 5) {
-                        weatherList.add(weatherData)
-                        cityCount++
+                        "01d" -> R.drawable._01d
+                        "02d" -> R.drawable._02d
+                        "03d" -> R.drawable._03d
+                        "04d" -> R.drawable._04d
+                        "09d" -> R.drawable._09d
+                        "10d" -> R.drawable._10d
+                        "11d" -> R.drawable._11d
+                        "13d" -> R.drawable._13d
+                        "50d" -> R.drawable._50d
+                        else  -> null
                     }
-                    if (cityCount == 5) {
-                        runOnUiThread {
-                            val adapter = WeatherAdapter(weatherList)
-                            rvweather.adapter = adapter
-                            rvweather.layoutManager = LinearLayoutManager(this@MainActivity)
-                        }
+
+                    val temp = main.getDouble("temp")           //RecyclerView
+                    Log.d("icon", icon)
+                    val weatherData = WeatherData(nameOfCity,temp,iconCheck!!)     //RecyclerView
+
+                    weatherList.add(weatherData) //RecyclerView
+
+                    runOnUiThread { //RecyclerView
+                        val adapter = WeatherAdapter(weatherList)
+                        rvweather.adapter = adapter
+                        rvweather.layoutManager = LinearLayoutManager(this@MainActivity)
                     }
                 }
             }
-
         })
     }
 
@@ -156,8 +171,6 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
-
         return future.get()
     }
-
 }

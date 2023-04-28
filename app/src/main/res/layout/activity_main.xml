@@ -14,14 +14,12 @@
         android:layout_height="wrap_content"
         android:text="@string/app_name"
         android:textColor="@color/black"
-        android:textSize="35sp"
+        android:textSize="40sp"
         android:textStyle="bold"
         android:layout_marginTop="10dp"
         android:layout_marginStart="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
-
-
 
     <EditText
         android:id="@+id/searchBarEditText"
@@ -38,28 +36,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/weatherButton"
-        android:layout_marginLeft="0dp"
+        android:layout_marginLeft="10sp"
         app:layout_constraintStart_toEndOf="@id/searchBarEditText"
         app:layout_constraintTop_toBottomOf="@id/weatherTextView"/>
-
-    <Button
-        android:id="@+id/favoriteButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/favoriteButton"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="10dp"
-        app:layout_constraintTop_toBottomOf="@id/searchBarEditText"
-        />
-
-    <Button
-        android:id="@+id/removeButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/remove_button"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="10dp"
-        app:layout_constraintTop_toBottomOf="@id/favoriteButton" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/weather_list"

@@ -2,12 +2,12 @@
     <string name="app_name">Weathernaut</string>
     <string name="cityName">Search for a city</string>
     <string name="CityName">City Name</string>
-    <string name="weatherButton">Get weather</string>
+    <string name="weatherButton">Search</string>
     <string name="temperature">Temperature</string>
     <string name="sunset">sunset</string>
     <string name="sunrise">sunrise</string>
-    <string name="favoriteButton">Favorite City</string>
-    <string name="remove_button">Remove City</string>
+    <string name="favoriteButton">Favorite</string>
+    <string name="unfavoriteButton">Unfavorite</string>
     <string name="description">description</string>
     <string name="feels_like">feels_like</string>
     <string name="temp_min">temp_min</string>

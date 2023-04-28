@@ -8,7 +8,6 @@
     android:layout_marginStart="10sp"
     tools:context=".DetailedActivity">
 
-
     <TextView
         android:id="@+id/cityName"
         android:layout_width="wrap_content"
@@ -117,13 +116,6 @@
         app:layout_constraintTop_toBottomOf="@id/temp_maxTextView"
         />
 
-    <Button
-        android:id="@+id/removeButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/remove_button"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="10dp"
-        app:layout_constraintTop_toBottomOf="@id/favoriteButton" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
