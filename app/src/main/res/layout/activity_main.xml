@@ -13,14 +13,15 @@
         android:id="@+id/weatherTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
         android:layout_marginTop="4dp"
-        android:fontFamily="@font/simple"
+        android:fontFamily="@font/activity2"
+        android:gravity="center"
         android:text="@string/app_name"
         android:textAllCaps="true"
         android:textColor="@color/white"
-        android:textSize="40sp"
+        android:textSize="50sp"
         android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -34,21 +35,21 @@
         android:inputType="text"
         android:textColor="@color/white"
         android:textStyle="bold"
+        android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/weatherTextView"
+        app:layout_constraintTop_toBottomOf="@id/weatherTextView"
         tools:ignore="TouchTargetSizeCheck" />
 
     <Button
         android:id="@+id/searchButton"
         style="@style/Widget.MaterialComponents.Button.Icon"
         android:layout_width="75dp"
-        android:layout_height="51dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="5dp"
+        android:layout_height="50dp"
         android:background="@color/Red"
         app:icon="@android:drawable/ic_search_category_default"
-        app:layout_constraintStart_toEndOf="@+id/searchBarEditText"
-        app:layout_constraintTop_toBottomOf="@+id/weatherTextView"
+        app:layout_constraintStart_toEndOf="@id/searchBarEditText"
+        app:layout_constraintBottom_toBottomOf="@id/searchBarEditText"
+        app:layout_constraintTop_toBottomOf="@id/weatherTextView"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <androidx.recyclerview.widget.RecyclerView
